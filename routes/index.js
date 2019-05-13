@@ -5,7 +5,7 @@ const domains = require('../conf/proj.json').domains;
 const midles = ['a','b','c','d','e']
 
 router.get('/novels', async (ctx, next) => {
-  let books = await TuiGuangModel.find({}, {weight:1})
+  let books = await TuiGuangModel.find({status:1}, {weight:1})
     let book_list = []
     for (var i = 0; i < books.length; i++) {
         let item = books[i]

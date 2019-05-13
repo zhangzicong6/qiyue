@@ -32,6 +32,7 @@
             <th>#</th>
             <th>标题</th>
             <th>推广日期</th>
+            <th>预览</th>
             <th style="width: 80px;">权重</th>
             <th>上架</th>
             <th>操作</th>
@@ -41,6 +42,7 @@
                 <td><%= tuiguangs[index].id%></td>
                 <td><%= tuiguangs[index].pageTitle%></td>
                 <td><%= tuiguangs[index].date%></td>
+                <td><a href="/a/<%= tuiguangs[index]._id%>" target="_black">预览</a></td>
                 <td>
                 <input type="number" class="form-control weight" data-id="<%= tuiguangs[index].id%>" value="<%= tuiguangs[index].weight%>">
                 </td>
@@ -280,8 +282,6 @@
         })
 
     })
-    
-
 </script>
 
 </body>

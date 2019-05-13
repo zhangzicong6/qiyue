@@ -34,18 +34,21 @@
 	<h3 id="qstitle"><%= content.pageTitle %></h3>
 	<div class="date clearfix" style="position: relative;">
 		<span><%= content.date %></span>
-		<a href="http://gg2.jianfeishuo.com.cn/novel/mynovel?info=she" id="advText"></a>
+		<a href="/novels" id="advText"></a>
 		<img class="dong" src="/img/006ZSEmqly1fwy821lr44g305v01h742.gif" style="position:absolute;width: 4.5rem;top: .8rem;left: 10rem;" />
 		<a class="fr ggzs" href="/external/tousu"><img src="/img/006ZSEmqly1fxa1wzipj7j300w01cwe9.jpg" style="position:absolute;width: 1.1rem;top: .8rem;right: 0.2rem;" /></a>
 	</div>
 	<!--<div class="xiangg" id="xiangtop">
 	</div>-->
-	<div class="ad_content" id="box" style="line-height: 200%"><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><section data-role="outer" label="Powered by 135editor.com" style="font-size:16px;"><section data-role="paragraph" style="border: 0px none;"><div id="wx-article-body" style="max-width: 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; overflow-wrap: break-word !important;"><section style="margin-top: 10px; margin-bottom: 10px; display: inline-block; max-width: 100%; width: 305px; overflow-wrap: break-word !important;"><section style="max-width: 100%; overflow-wrap: break-word !important;"><section style="color: rgb(62, 62, 62); margin-top: 20px; max-width: 100%; transform: rotate(0deg); overflow-wrap: break-word !important;"><section style="padding-top: 10px; padding-bottom: 10px; max-width: 100%; background-color: rgb(194, 201, 42); color: rgb(255, 255, 255); font-size: 20px; text-align: center; letter-spacing: 0.2em; overflow-wrap: break-word !important;">
+	<div class="ad_content" id="box" style="line-height: 200%"><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+	<section data-role="outer" label="Powered by 135editor.com" style="font-size:16px;"><section data-role="paragraph" style="border: 0px none;">
+	<div id="wx-article-cover" style="max-width: 100%; color: rgb(62, 62, 62); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; font-size: 16px; word-wrap: break-word !important;"><img src="<%= content.picurl%>" style="max-width:100%;"><br></div>
+	`
+	<div id="wx-article-body" style="max-width: 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; overflow-wrap: break-word !important;">
+
 	<!-- 章节 -->
 
 	<%- content.capter %>
-
-	</section>
 	</section>
 	</div>
 
@@ -70,8 +73,6 @@
 
 
 <!-- <script src="/js/loadad.js"></script> -->
-<script src="/js/content.js"></script>
-
 <script>
     var ctx ='';
     var uid='';
@@ -89,7 +90,7 @@
     var textRandom = Math.floor((Math.random() * textArray.length));
     $('#advText').text(textArray[textRandom]);
     var hrefArry= new Array();
-    hrefArry[0]="http://gg2.iwaterline.com/novel/xsnovel?info=tzmtx&mybox=ds-xs";
+    hrefArry[0]="/novels";
     var hrefRandom = Math.floor((Math.random() * hrefArry.length));
     $("#advText").attr('href',hrefArry[hrefRandom]);
 
@@ -138,6 +139,17 @@
     }
     //$("#box img").eq(0).remove();
 </script>
+<script type="text/javascript">
+	window.history.pushState('forward', null, '#');
+	if(window.history && window.history.pushState) {
+		window.onpopstate = async function() {
+			location.href = '/novels'
+		}
+	}
+</script>
+
+<!-- <script src="/js/content.js"></script> -->
+
 <div id="adv" style="display:none;z-index: 101">
 </div>
 </body></html>
