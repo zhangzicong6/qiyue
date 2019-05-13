@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title id="qstitle1">姐夫出差几天，姐姐每晚都忍不住摩擦自己……</title>
+    <meta content="initial-scale=1, maximum-scale=1" name="viewport" />
+    <meta content="yes" name="yiduxiaos" />
+    <meta content="black" name="yiduxiaos" />
+	<meta content="no-referrer" name="referrer" />
+    <meta content="width=device-width,initial-scale=1,user-scalable=0" name="viewport" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script src="/js/jquery-3.3.1.min.js"></script>
+
+	<!-- 字体
+	<script src="http:///at.alicdn.com/t/font_p4z46r8yri6yldi.js" type="text/javascript"></script> -->
+
+	<style>
+		.pop_window{position:fixed;z-index:10000;width:100%;height:100%;left:0;top:0;}
+		.pop_window .tuika img{width:80%;height:auto;margin:20% auto;display:inline-block;}
+	</style>
+    
+</head>
+<body>
+<div class="pop_window" style="cursor:pointer;background: #333;opacity: .9;display: none;">
+	<img id="topimg" src="/img/006RPL1Yly1g0zzvrvhgvg30nw0f5my9.gif" width="100%" />
+</div>
+<div class="ad_l_a">
+	<ul class="alist">
+		<li class="clearfix" id="adv0"></li>
+	</ul>
+</div>
+<div class="ad_cot">
+	<h3 id="qstitle"><%= content.pageTitle %></h3>
+	<div class="date clearfix" style="position: relative;">
+		<span><%= content.date %></span>
+		<a href="http://gg2.jianfeishuo.com.cn/novel/mynovel?info=she" id="advText"></a>
+		<img class="dong" src="/img/006ZSEmqly1fwy821lr44g305v01h742.gif" style="position:absolute;width: 4.5rem;top: .8rem;left: 10rem;" />
+		<a class="fr ggzs" href="/external/tousu"><img src="/img/006ZSEmqly1fxa1wzipj7j300w01cwe9.jpg" style="position:absolute;width: 1.1rem;top: .8rem;right: 0.2rem;" /></a>
+	</div>
+	<!--<div class="xiangg" id="xiangtop">
+	</div>-->
+	<div class="ad_content" id="box" style="line-height: 200%"><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><section data-role="outer" label="Powered by 135editor.com" style="font-size:16px;"><section data-role="paragraph" style="border: 0px none;"><div id="wx-article-body" style="max-width: 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; overflow-wrap: break-word !important;"><section style="margin-top: 10px; margin-bottom: 10px; display: inline-block; max-width: 100%; width: 305px; overflow-wrap: break-word !important;"><section style="max-width: 100%; overflow-wrap: break-word !important;"><section style="color: rgb(62, 62, 62); margin-top: 20px; max-width: 100%; transform: rotate(0deg); overflow-wrap: break-word !important;"><section style="padding-top: 10px; padding-bottom: 10px; max-width: 100%; background-color: rgb(194, 201, 42); color: rgb(255, 255, 255); font-size: 20px; text-align: center; letter-spacing: 0.2em; overflow-wrap: break-word !important;">
+	<!-- 章节 -->
+
+	<%- content.capter %>
+
+	</section>
+	</section>
+	</div>
+
+	<div class="click_me tc unload">
+		<div class="clickbox">
+			<a href="javascript:;">点我阅读全文</a>
+		</div>
+	</div>
+</div>
+<div class="ad_l_a">
+	<ul class="alist">
+		<li class="clearfix" id="adv1"></li>
+		<li class="clearfix" id="adv2"></li>
+	</ul>
+</div>
+<div class="ad_l_a contentlist">
+	<h4 class="ad_til">他们正在看..</h4>
+	<ul class="alist" id="contentlist">
+	</ul>
+</div>
+
+
+
+<!-- <script src="/js/loadad.js"></script> -->
+<script src="/js/content.js"></script>
+
+<script>
+    var ctx ='';
+    var uid='';
+    var scene='ds-xs';
+    var show=0;
+
+    var textArray = new Array();
+    /*浮窗*/
+    textArray[0] = '签到领红包';
+    textArray[1] = '幸运大转盘';
+    textArray[2] = '我要抽大奖';
+    textArray[3] = '免费领红包';
+    textArray[4] = '签到领现金';
+    textArray[5] = '免费抽大奖';
+    var textRandom = Math.floor((Math.random() * textArray.length));
+    $('#advText').text(textArray[textRandom]);
+    var hrefArry= new Array();
+    hrefArry[0]="http://gg2.iwaterline.com/novel/xsnovel?info=tzmtx&mybox=ds-xs";
+    var hrefRandom = Math.floor((Math.random() * hrefArry.length));
+    $("#advText").attr('href',hrefArry[hrefRandom]);
+
+    /*
+    随机标题
+    var qstitle=new Array();
+    qstitle[0]="●一女子嫁了6个老公, 终于说出心里话!";
+    qstitle[1]="▷50岁老 头新婚, 不笑你揍我";
+    qstitle[2]="▷日本女人和中国女人的天差地别, 看完我沉默了！";
+    qstitle[3]="▷男人想女人和女人想男人的区别, 扎心了";
+    qstitle[4]="▷2019老同学聚会, 真不能去了";
+    qstitle[5]="▷男人四十想女人,女人四十想……";
+    qstitle[6]="▶夜深了，你是不是又想她了…";
+    qstitle[7]="▶美国女人和中国女人的差别! 看我震惊了!";
+    qstitle[8]="▶一人不进庙, 二人不看井, 三人不抱树, 原来是这个意思";
+    qstitle[9]="▷最不能惹的三个女人, 特别是第二个！";
+    qstitle[10]="▶打麻将输成这熊样, 真服了！";
+    qstitle[11]="○老汉和媳妇杀猪, 看一次笑一次！";
+    qstitle[12]="▷小沈阳大年30闹离婚, 气坏老丈人！";
+    qstitle[13]="▶取二婚老婆的下场! 看看吧!";
+    qstitle[14]="●大媳妇, 二媳妇！";
+    qstitle[15]="▷小媳妇和村长吵架, 笑抽了！";
+    qstitle[16]="▷为什么男人喜欢年轻的姑娘? 看完全明白了!";
+    qstitle[17]="▷25岁女人与40岁男人的对话（不看后悔死）";
+    qstitle[18]="▷夫妻两人对暗号, 笑死了";
+    qstitle[19]="▶男人四十岁,请远离二十岁的女人,女人四十岁…";
+    var qsnum = Math.floor(Math.random()*20);
+    if(scene == 'jkd-dj'){
+        $("#qstitle").text(qstitle[qsnum]);
+        $("#qstitle1").text(qstitle[qsnum]);
+    }
+    */
+
+</script>
+<script type="text/javascript">
+    var btn = document.getElementsByClassName('click_me');
+    var contentBox = document.getElementById('box');
+    if(scene=="wbtf"){
+        contentBox.style.height = 'auto';
+        $(".click_me").hide();
+	}else {
+        btn[0].onclick = function () {
+            contentBox.style.height = 'auto';
+            this.style.display = 'none';
+        }
+    }
+    //$("#box img").eq(0).remove();
+</script>
+<div id="adv" style="display:none;z-index: 101">
+</div>
+</body></html>

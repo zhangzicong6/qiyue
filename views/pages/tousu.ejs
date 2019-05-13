@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="data:image/ico;base64,aWNv" rel="icon">
+    <title>投诉</title>
+    <link href="/tousu/tousu.css" rel="stylesheet" type="text/css">
+    <link href="/tousu/tousu2.css" rel="stylesheet" type="text/css">
+    <style>
+        .weixin_btn{color: #3c76ff;text-decoration: none;font-size: .7rem;padding-left: .4rem;}
+        .ts_xz{ position: absolute;bottom: 1rem;left: 50%; margin-left: -30px;}.ts_xz a{color: #3c76ff;text-align: center; text-decoration: none; font-size: .7rem}
+    </style>
+    <!-- body 最后 -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+    <script defer="defer" type="text/javascript">
+        $(document).ready(function () {
+            $("#tspage_2").hide();
+            $("#shpage_3").hide();
+        });
+
+        function subTSinfo() {
+            $("#ts01").hide();
+            $("#ts02").hide();
+            $("#tspage_1").hide();
+            $("#tspage_2").show();
+            $("#tstitle").html("你可以：");
+        }
+
+        function subSHinfo() {
+            $("#ts01").hide();
+            $("#ts02").hide();
+            $("#tspage_1").hide();
+            $("#tspage_2").hide();
+            $("#tstitle").hide();
+            $("#shpage_3").slideDown(200);
+        }
+
+
+    </script>
+</head>
+
+<body right-click="">
+<div style="display: block;">
+<div class="weui-cells__title" id="tstitle">请选择投诉网页的原因：</div>
+<div class="weui-cells" id="tspage_1">
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页包含欺诈信息（如：假红包）</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页包含色情信息</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页包含暴力恐怖信息</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页包含政治敏感信息</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页在收集个人隐私信息（如：钓鱼链接）</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页包含诱导分享性质的内容</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页可能包含谣言信息</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript: subTSinfo();">
+        <div class="weui-cell__bd"><p>网页可能包含赌博信息</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+</div>
+</div>
+<div class="weui-cells" id="tspage_2" style="display: none;">
+    <a class="weui-cell weui-cell_access" href="javascript: subSHinfo();">
+        <div class="weui-cell__bd"><p>提交给平台的微信运营团队审核</p></div>
+        <div class="weui-cell__ft"></div>
+    </a>
+</div>
+<!--操作成功-->
+<div class="weui-msg" id="shpage_3" style="display: none;">
+    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">投诉已提交</h2>
+        <p class="weui-msg__desc">平台的微信运营团队会尽快核实。感谢你的支持。</p>
+    </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+            <a class="weui-btn weui-btn_primary" href="javascript:WeixinJSBridge.call(&#39;closeWindow&#39;);">关闭</a>
+        </p>
+    </div>
+</div>
+
+<div class="btn_ts" id="ts01">
+    <a class="weixin_btn" href="/external/tousu">了解微信对谣言的治理</a>
+</div>
+<p class="ts_xz" id="ts02"><a href="/external/tousu">投诉须知</a></p>
+
+</body></html>

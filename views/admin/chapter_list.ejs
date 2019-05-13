@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理后台</title>
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+    <style type="text/css">
+        .modal-body {
+            overflow-y: auto;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" class="btn btn-default create_chapter" data-id="null">创建文章</button>
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>标题</th>
+            <th>推广日期</th>
+            <th style="width: 80px;">权重</th>
+            <th>上架</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            <%for(var index in tuiguangs){%>
+                <td><%= tuiguangs[index].id%></td>
+                <td><%= tuiguangs[index].pageTitle%></td>
+                <td><%= tuiguangs[index].date%></td>
+                <td>
+                <input type="number" class="form-control weight" data-id="<%= tuiguangs[index].id%>" value="<%= tuiguangs[index].weight%>">
+                </td>
+                <td>
+                    <div class="switch" data-on="primary" data-off="info">
+                        <input type="checkbox" class="status" data-id="<%= tuiguangs[index].id%>" <%= (tuiguangs[index].status?'checked':'')%> />
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default edit_chapter" data-id="<%= tuiguangs[index].id%>">编辑</button>
+                    <button type="button" class="btn btn-default delete" data-id="<%= tuiguangs[index].id%>">删除</button>
+                </td>
+            <%}%>
+        </tbody>
+    </table>
+    <ul class="pagination">
+        
+    </ul>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    编辑文章
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="title">
+                    <div class="form-group">
+                        <label for="pageTitle">文章标题</label>
+                        <input type="text" class="form-control" id="pageTitle" placeholder="请输入文章标题">
+                    </div>
+                </form>
+                <form id="img_form" enctype='multipart/form-data'>
+                    <div class="form-group">
+                        <label for="pic">图片上传</label>
+                        <input type="file" id="pic" accept="image/*">
+                        <p class="help-block">
+                            <img src="" id="pic_before">
+                        </p>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="picurl">图片链接</label>
+                            <input type="text" name="picurl" id="picurl" placeholder="上传图片或输入图片链接">
+                        </div>
+                    </div>
+                </form>
+
+                <form id="content">
+                    <div class="form-group">
+                        <label for="summernote">文案</label>
+                        <textarea id="summernote" name="editordata"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">推广时间</label>
+                        <input type="text" class="form-control" id="date" placeholder="请输入推广时间">
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">权重</label>
+                        <input type="number" class="form-control" id="weight" placeholder="请输入权重">
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="submit_tuiguang">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+
+
+<script type="text/javascript">
+    var id =null;
+    var data = null;
+    var uploading = false;
+    $(function(){
+        $(".create_chapter").on('click',function (event) {
+            id =null
+            data = {}
+            $('#summernote').summernote('code','');
+            $("#myModal").modal("show");
+        })
+        $('#summernote').summernote();
+
+        $(".edit_chapter").on('click',function (event) {
+            id = event.target.getAttribute("data-id")
+            //ajax 访问data
+            $.ajax({
+                url: '/tuiguang/get_content?id='+id,
+                type: 'get',
+                cache: false,
+                dataType:"json",
+                success : function(res) {
+                    data = res.data
+                    $("#pageTitle").val(data.pageTitle)
+                    $("#date").val(data.date)
+                    $("#weight").val(data.weight)
+                    $("#picurl").val(data.picurl)
+                    $("#pic_before").attr("src", data.picurl);
+                    $('#summernote').summernote('code',data.capter);
+                    $("#myModal").modal("show");
+                }
+            });
+        })
+
+        $("#pic").on("change", function(e){
+            if(uploading){
+                alert("文件正在上传中，请稍候");
+                return false;
+            }
+            console.log($('#pic')[0].files[0])
+            var formData = new FormData();
+            formData.append('pic', $('#pic')[0].files[0]);
+            
+            //console.log(formData)
+            //return
+
+            $.ajax({
+                url: "/tuiguang/upload",
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType:"json",
+                beforeSend: function(){
+                    uploading = true;
+                },
+                success : function(data) {
+                    if (data.filename) {
+                        $("#pic_before").attr("src", '/upload/'+data.filename);
+                        $("#picurl").val('/upload/'+data.filename)
+                    }
+                    uploading = false;
+                }
+            });
+        })
+
+        $(".status").on("change",function(e){
+            var tid = e.target.getAttribute("data-id")
+            var status = e.target.checked?1:0
+            var url  = '/tuiguang/update'
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: {status:status,id:tid},
+                dataType:"json",
+                success : function(data) {
+                    console.log(data)
+                }
+            });
+        })
+
+        var edit_weight = function(target){
+            var tid = target.getAttribute("data-id")
+            var weight = $(target).val()
+            var url  = '/tuiguang/update'
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: {weight:weight,id:tid},
+                dataType:"json",
+                success : function(data) {
+                    console.log(data)
+                }
+            });
+        }
+
+        $(".weight").on("keydown",function(e){
+            if(event.keyCode==13){
+                edit_weight(e.target)
+            }
+        })
+        $(".weight").blur(function(e){
+            edit_weight(e.target)
+        })
+
+        $(".delete").on("click",function(e){
+            var tid = e.target.getAttribute("data-id")
+            var url  = '/tuiguang/delete?id='+tid
+            $.ajax({
+                url: url,
+                type: 'get',
+                cache: false,
+                dataType:"json",
+                success : function(data) {
+                    window.location.reload()
+                }
+            });
+        })
+
+
+        $("#submit_tuiguang").on('click',function(){
+            var url;
+            if(!id){
+                url = '/tuiguang/add'
+            }else{
+                url = '/tuiguang/update'
+            }
+
+            data.pageTitle = $("#pageTitle").val()
+            data.date = $("#date").val()
+            data.weight = $("#weight").val()
+            var picurl = $("#picurl").val()
+            if(picurl)
+                data.picurl = picurl
+
+            data.capter = $('#summernote').summernote('code')
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: data,
+                dataType:"json",
+                success : function(data) {
+                    console.log(data)
+                    $("#myModal").modal("hide");
+                    window.location.reload()
+                }
+            });
+        })
+
+    })
+    
+
+</script>
+
+</body>
+</html>
