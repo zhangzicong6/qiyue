@@ -1,7 +1,9 @@
 const router = require('koa-router')()
 const TuiGuangModel = require('../model/TuiGuang.js');
 const mem = require('../util/mem.js')
-const domains = require('../conf/proj.json').domains;
+const config = require('../conf/proj.json');
+const domains = config.domains
+
 const midles = ['a','b','c','d','e']
 
 router.get('/novels', async (ctx, next) => {
@@ -29,7 +31,8 @@ router.get('/:index/:item', async (ctx, next) => {
 	let _id = ctx.params.item;
 	let tuiguang = await TuiGuangModel.findById(_id)
 	return ctx.render('pages/content',{
-		content:tuiguang
+		content:tuiguang,
+		transfer: config.transfer
 	})
 })
 

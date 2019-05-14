@@ -1,4 +1,5 @@
 {
 	"mongodb":"mongodb://localhost:27017/qiyue",
-	"domains":["j.lbxdh.com"]
+	"domains":["m.changduxs.com"],
+	"transfer":"h.aiyuexs.com"
 }

@@ -34,7 +34,7 @@
 	<h3 id="qstitle"><%= content.pageTitle %></h3>
 	<div class="date clearfix" style="position: relative;">
 		<span><%= content.date %></span>
-		<a href="/novels" id="advText"></a>
+		<a href="<%= transfer%>/novels" id="advText"></a>
 		<img class="dong" src="/img/006ZSEmqly1fwy821lr44g305v01h742.gif" style="position:absolute;width: 4.5rem;top: .8rem;left: 10rem;" />
 		<a class="fr ggzs" href="/external/tousu"><img src="/img/006ZSEmqly1fxa1wzipj7j300w01cwe9.jpg" style="position:absolute;width: 1.1rem;top: .8rem;right: 0.2rem;" /></a>
 	</div>
@@ -45,10 +45,10 @@
 		<img src="<%= content.picurl%>" style="max-width:100%;">
 		</p>
 	<!-- 章节 -->
-
 	<%- content.capter %>
-	
+
 	<section data-role="outer" label="Powered by 135editor.com" style="font-size:16px;"><section data-role="paragraph" style="border: 0px none;">
+
 	<div id="wx-article-cover" style="max-width: 100%; color: rgb(62, 62, 62); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; font-size: 16px; word-wrap: break-word !important;"><img src="<%= content.picurl%>" style="max-width:100%;"><br></div>
 	
 	<div id="wx-article-body" style="max-width: 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif; overflow-wrap: break-word !important;">
@@ -147,7 +147,7 @@
 	window.history.pushState('forward', null, '#');
 	if(window.history && window.history.pushState) {
 		window.onpopstate = async function() {
-			location.href = '/novels'
+			location.href = '<%= transfer%>/novels'
 		}
 	}
 </script>
