@@ -33,6 +33,17 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+app.use(async(ctx, next) => {
+    ctx.set('Access-Control-Allow-Headers', 'content-type,xfilecategory,xfilename,xfilesize,u_id,device_id,uid,deviceid,X-Requested-With');
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Credentials', 'true');
+    ctx.set('Access-Control-Allow-Methods', 'PUT,DELETE,POST,GET,OPTIONS');
+    if (ctx.request.method == "OPTIONS") {
+        ctx.response.status = 200
+    }
+    await next();
+});
+
 // routes
 app.use(admin.routes(), admin.allowedMethods())
 app.use(tuiguang.routes(), tuiguang.allowedMethods())

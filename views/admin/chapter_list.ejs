@@ -39,6 +39,7 @@
         </thead>
         <tbody>
             <%for(var index in tuiguangs){%>
+            <tr>
                 <td><%= tuiguangs[index].id%></td>
                 <td><%= tuiguangs[index].pageTitle%></td>
                 <td><%= tuiguangs[index].date%></td>
@@ -55,6 +56,7 @@
                     <button type="button" class="btn btn-default edit_chapter" data-id="<%= tuiguangs[index].id%>">编辑</button>
                     <button type="button" class="btn btn-default delete" data-id="<%= tuiguangs[index].id%>">删除</button>
                 </td>
+                </tr>
             <%}%>
         </tbody>
     </table>
